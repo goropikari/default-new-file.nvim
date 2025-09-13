@@ -32,11 +32,11 @@ local function insert_template()
     return
   end
 
-  local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
-  row = row - 1
+  local lines = vim.split(template, '\n')
+  table.remove(lines)
 
   if vim.api.nvim_get_option_value('modifiable', { buf = 0 }) then
-    vim.api.nvim_buf_set_lines(0, row, -1, false, vim.split(template, '\n'))
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
   end
 end
 
